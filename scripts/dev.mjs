@@ -99,7 +99,7 @@ function broadcastReload(wss) {
 }
 
 async function main() {
-  // await runPipelineDev();
+  await runPipelineDev();
   await ensureLiveReloadInjected();
 
   const server = createStaticServer();
@@ -116,25 +116,31 @@ async function main() {
     { ignoreInitial: true }
   );
 
-  let building = false;
-  let pending = false;
-  async function rebuild() {
-    if (building) { pending = true; return; }
-    building = true;
-    try {
-      // await runPipelineDev();
-      await ensureLiveReloadInjected();
-      broadcastReload(wss);
-      console.log('Rebuilt.');
-    } catch (e) {
-      console.error(e);
-    } finally {
-      building = false;
-      if (pending) { pending = false; rebuild(); }
-    }
-  }
+ let building = false;
+let pending = false;
 
-  watcher.on('all', rebuild);
+async function rebuild() {
+  if (building) { pending = true; return; }
+  building = true;
+  try {
+    await runPipelineDev();           // ✅ rebuild dist
+    await ensureLiveReloadInjected(); // ✅ reinject after build
+    broadcastReload(wss);             // ✅ reload clients
+    console.log('Rebuilt.');
+  } catch (e) {
+    console.error(e);
+  } finally {
+    building = false;
+    if (pending) { pending = false; rebuild(); }
+  }
+}
+
+let rebuildTimer = null;
+watcher.on('all', () => {
+  clearTimeout(rebuildTimer);
+  rebuildTimer = setTimeout(rebuild, 100);
+});
+
 }
 
 main().catch((err) => {

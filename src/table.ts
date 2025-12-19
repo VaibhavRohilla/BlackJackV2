@@ -1,15 +1,15 @@
 import { Container, Sprite } from "pixi.js";
 import { Globals } from "./globals";
 import { config } from "./appconfig";
+import { CenterChip } from "./CenterChip";
 
 export class Table extends Container {
     table: Sprite = new Sprite();
     tableText: Sprite = new Sprite();
+    centerChip : CenterChip = new CenterChip();
     constructor() {
         super();
         this.setupTable();
-
-
     }
 
    
@@ -22,14 +22,15 @@ export class Table extends Container {
         this.tableText.anchor.set(0.5);
         this.addChild(this.table);
         this.addChild(this.tableText);
-
+        this.addChild(this.centerChip);
     }
 
     resize() {
-        this.table.scale.set(0.5 * config.scaleFactor);
+        this.table.scale.set(0.4 * config.scaleFactor);
         this.tableText.scale.set(1 * config.scaleFactor)
         this.tableText.position.y = (-this.table.height / 4)
         this.position.set(window.innerWidth / 2, window.innerHeight / 2);
+        this.centerChip.resize();
     }
 
 }

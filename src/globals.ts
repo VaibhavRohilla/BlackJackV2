@@ -27,6 +27,15 @@ export const Globals: globalDataType = {
   soundResources: {},
 };
 
+export const playerData ={
+
+  balance : 1000,
+  currentBet : 0
+
+}
+
+
+
 
 export enum POPUP  {
 INSURANCE ="popups/BlackJack_insurance",

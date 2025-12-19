@@ -22,7 +22,7 @@ export class EndScreen extends Container {
     setupOverlay() {
         this.overlay.rect(0, 0, window.innerWidth, window.innerHeight)
             .fill({ color: 0x000000, alpha: 0.7 })
-        this.overlay.position.set(-window.innerWidth / 2, -window.innerHeight / 2)
+        this.overlay.position.set(0,0)
         this.addChild(this.overlay);
     }
 
@@ -30,8 +30,7 @@ export class EndScreen extends Container {
         this.popup = new Sprite(Globals.resources[this.popupCase])
         this.popup.anchor.set(0.5);
         this.popup.scale.set(0);
-        this.popup.position.y -= window.innerHeight / 12;
-
+        this.popup.position.set(window.innerWidth/2,window.innerHeight/2);
         this.addChild(this.popup);
         this.tweenUp();
     }
@@ -75,8 +74,7 @@ export class EndScreen extends Container {
         this.overlay.clear();
         this.overlay.rect(0, 0, window.innerWidth, window.innerHeight)
         .fill({ color: 0x000000, alpha: 0.5 })
-        this.overlay.position.set(-window.innerWidth / 2, -window.innerHeight / 2);
-        this.popup.position.y -= window.innerHeight / 12;
+        this.popup.position.set(window.innerWidth/2,window.innerHeight/2);
 
         if (this.isBreating) {
             this.isBreating.stop();

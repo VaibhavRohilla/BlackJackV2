@@ -2,8 +2,10 @@
 import { Scene } from "./scene";
 import { logger } from "./utils/logger";
 import { Table } from "./table";
-import { EndScreen } from "./endScreen";
 import { POPUP } from "./globals";
+import { EndScreen } from "./endScreen";
+import { chipsManager } from "./chipsManager";
+import { MenuPopup } from "./MenuPopup";
 
 /**
  * Main game scene that manages the blackjack table and game logic
@@ -11,14 +13,21 @@ import { POPUP } from "./globals";
 export class TableManager extends Scene {
     table: Table = new Table();
     endScreen: EndScreen | undefined = undefined;
+    chipsManager : chipsManager = new chipsManager();
+    menuPopup : MenuPopup = new MenuPopup();
 
     constructor() {
         super(false);
+        this.setupGame();
     }
 
     setupGame()
     {
         this.addChildToFullScene(this.table);
+        this.addChildToFullScene(this.chipsManager);
+        this.addChildToFullScene(this.menuPopup);
+
+        // this.callEndScreen();
     }
 
 
@@ -38,6 +47,9 @@ export class TableManager extends Scene {
 
     public resize(): void {
         super.resize();
+        this.chipsManager.resize();
+        this.menuPopup.resize();
+
         if (this.endScreen) this.endScreen.resize();
         this.table.resize();
     }
