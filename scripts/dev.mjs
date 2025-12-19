@@ -99,7 +99,7 @@ function broadcastReload(wss) {
 }
 
 async function main() {
-  await runPipelineDev();
+  // await runPipelineDev();
   await ensureLiveReloadInjected();
 
   const server = createStaticServer();
@@ -123,7 +123,7 @@ async function rebuild() {
   if (building) { pending = true; return; }
   building = true;
   try {
-    await runPipelineDev();           // ✅ rebuild dist
+    // await runPipelineDev();           // ✅ rebuild dist
     await ensureLiveReloadInjected(); // ✅ reinject after build
     broadcastReload(wss);             // ✅ reload clients
     console.log('Rebuilt.');

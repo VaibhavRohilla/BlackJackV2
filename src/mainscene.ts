@@ -6,6 +6,7 @@ import { POPUP } from "./globals";
 import { EndScreen } from "./endScreen";
 import { chipsManager } from "./chipsManager";
 import { MenuPopup } from "./MenuPopup";
+import { ShopPopup } from "./ShopPopup";
 
 /**
  * Main game scene that manages the blackjack table and game logic
@@ -15,6 +16,7 @@ export class TableManager extends Scene {
     endScreen: EndScreen | undefined = undefined;
     chipsManager : chipsManager = new chipsManager();
     menuPopup : MenuPopup = new MenuPopup();
+    shopPopup : ShopPopup = new ShopPopup(()=>{},()=>{});
 
     constructor() {
         super(false);
@@ -25,7 +27,9 @@ export class TableManager extends Scene {
     {
         this.addChildToFullScene(this.table);
         this.addChildToFullScene(this.chipsManager);
+        this.addChildToFullScene(this.shopPopup);
         this.addChildToFullScene(this.menuPopup);
+        this.shopPopup.open();
 
         // this.callEndScreen();
     }

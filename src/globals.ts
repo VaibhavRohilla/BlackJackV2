@@ -34,7 +34,16 @@ export const playerData ={
 
 }
 
-
+// Z-index constants for proper layering
+export const Z_INDEX = {
+    BACKGROUND: 0,
+    TABLE: 10,
+    CARDS: 10,
+    CHIPS: 20,
+    POPUP_OVERLAY: 30,
+    POPUPS: 40,
+    BUTTONS: 50
+};
 
 
 export enum POPUP  {

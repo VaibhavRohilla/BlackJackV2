@@ -614,12 +614,7 @@ export class MenuPopup extends Container {
      * @param menuButtonWidth - Width of the menu button
      * @param menuButtonHeight - Height of the menu button
      */
-    public positionNextToMenuButton(menuButtonX: number, menuButtonY: number, menuButtonWidth: number, menuButtonHeight: number): void {
-        // Get screen dimensions
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        const isPortrait = screenHeight > screenWidth;
-        
+    public positionNextToMenuButton(menuButtonX: number, menuButtonY: number): void {
         // Update layout first to get correct dimensions
         this.updateLayout();
         
